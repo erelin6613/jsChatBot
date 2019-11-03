@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: rgb(219, 235, 235);
+    font: 13px/18px Tahoma,sans-serif,Arial,Helvetica;
+}
+
+.main{
+    height: 95vh; 
+    /* 97vh */
+    max-width: 1010px;
+    min-width: 300px;
+    margin: 0 auto;
+    display: grid;
+    /* grid-template-columns: 1fr 2fr;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas: 
+        "header header"
+        "dlgBox msgBox"; */
+    grid:
+        "header header" 50px
+        "dlgBox msgBox" 1fr
+        / 1fr 2fr;
+    column-gap: 2px;
+}
+
+.header,
+.dialogsBox,
+.messagesBox {
+    background: rgb(255, 255, 255);
+}
+.header {
+    grid-area: header;
+    background: #5682a3;
+}
+.dialogsBox {
+    grid-area: dlgBox;
+    overflow-y: scroll;
+}
+.dialog {
+    display: grid;
+    grid-template-columns: 40px 1fr max-content;
+    grid-gap: 10px;
+    font-size: 1.1em;
+    border-bottom: 1px solid rgb(219, 235, 235);
+    padding: 10px 10px 10px 5px;
+}
+.dialog:active,
+.dialog:hover {
+    background: rgb(230, 223, 223);
+}
+.dialog:hover {
+    cursor: pointer;
+}
+.dialog > img {
+    height: 40px;
+    border-radius: 100%;
+    grid-row: span 2;
+}
+.title-text {
+    font-weight: bold;
+    padding-left: 5px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+.dialog-message {
+    grid-column: span 2;
+    padding-left: 5px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+.messagesBox {
+    grid-area: msgBox;
+    display: grid;
+    /* Trouble somewhere here */
+    grid:
+        "messages" 80vh
+        "newMessage" 10vh
+        / 1fr;
+    row-gap: 30px;
+}
+
+.messages, 
+.newMessage{
+    background: rgb(255, 255, 255);
+}
+.messages{
+    grid-area: messages;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    overflow-y: scroll;
+    /* КОСТЫЛЬ НИЖЕ */
+    /* height: 715px; */
+}
+.message {
+    display: grid;
+    grid-template-columns: 70%;
+    margin-bottom: 20px;
+
+}
+.message-content {
+    display: grid;
+}
+.client {
+    justify-content: end;
+}
+.client .message-content {
+    justify-items: end;
+}
+.server{
+    justify-content: start;
+}
+.server .message-content {
+    justify-items: start;
+}
+
+.message-text {
+    padding: 9px 14px;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+.message-time {
+    font-size: 1.1em;
+    color: #777;
+}
+.client .message-text {
+    background: rgb(173, 241, 164);
+    color: #111;
+    border: 1px solid rgb(173, 241, 164);
+    border-radius: 14px 14px 0 14px;
+}
+.server .message-text {
+    background: #eee;
+    color: #111;
+    border: 1px solid #ddd;
+    border-radius: 14px 14px 14px 0;
+}
+
+.newMessage{
+    grid-area: newMessage;
+}
+.msgForm{
+    display: grid;
+    grid:
+        ". txtArea ." 1fr
+        ". txtSend ." 30px
+        /70px 1fr 70px;
+}
+.textArea{
+    grid-area: txtArea;
+    font-size: 12px;
+    margin-bottom: 10px;
+    padding: 6px;
+    min-height: 50px;
+    height: 50px;
+    resize: none;
+    border-bottom: 1px solid #d9dbde;
+    border-radius: 2px;
+}
+.textSend{
+    grid-area: txtSend;
+    justify-self: end;
+    color: #499dd9;
+    text-align: right;
+    background: 0 0;
+    text-decoration: none;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    font-weight: bold;
+    border: none;
+}
+span:hover,
+button:hover{
+    color: #4793d4;
+}
+button:focus{
+    outline: none;
+}
+.messagesBox,
+.dialogsBox{
+    scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+    display: none;
+}
